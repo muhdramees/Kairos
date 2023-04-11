@@ -1,0 +1,54 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+<div class="py-3  bg-link" aria-label="breadcrumb" >
+    <div class="container m-0 p-0  breadcrumb ">
+        <a class="breadcrumb-item" href="{% url 'home' %}">HOME </a>
+        <a class="breadcrumb-item active" aria-current="page" href="{% url 'my_order' %}">My Order</a>
+    </div>
+</div>
+
+<div class="page section-header text-center">
+    <div class="page-title">
+      <div class="wrapper">
+        <h1 class="page-width">My Order</h1>
+      </div>
+    </div>
+  </div>
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <table class="table table-bordereds">
+                        <thead>
+                            <tr>
+                                <th>Order Date</th>
+                                <th>Tracking Number</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in orders %}
+                            <tr>
+                                <td>{{ item.created_at }}</td>
+                                <td>{{ item.tracking_no }}</td>
+                                <td>{{ item.total_price }}</td>
+                                <td>{{ item.status }}</td>
+                                <td>
+                                    <a href="{% url 'view_order' item.tracking_no %}" class="btn btn-primary">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

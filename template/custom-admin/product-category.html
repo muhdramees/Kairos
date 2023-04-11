@@ -1,0 +1,104 @@
+{% extends "custom-admin/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+
+
+<div  aria-label="breadcrumb">
+  <div class="container m-0 p-0 breadcrumb" >
+    <a class="breadcrumb-item" href="{% url 'admin_dashboard' %}">Dashboard </a>
+    <a class=" breadcrumb-item active" aria-current="page" href="{% url 'product_category' %}">Category</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 bg-light text-right">
+   
+<!--      
+      <a href="{% url 'product_offers'%}"><button type="button" class="btn btn-primary">Product Offers</button></a>
+      <a href="{% url 'category_offer'%}"><button type="button" class="btn btn-primary">Category Offers</button></a> -->
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Category</h1>
+  <a href="{% url 'add_category' %}"><button class="btn btn-secondary btn-lg " type="submit">Add Category</button></a>
+
+</div>
+
+<!-- 
+<div class="container">
+
+  <div class="row">
+    {% for item in category %}
+
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+
+        {% if item.image %}
+          <img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap">
+        {% endif %}
+        <a href="{% url 'category_view' item.slug %}">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name}}</h5>
+          </a>
+            <p class="card-text">{{ item.meta_description}}</p>
+          </div>
+           
+        
+       
+          <a href="{% url 'delete_category' item.id %}"><button class="btn btn-secondary btn-lg btn-block" type="submit">Delete Category</button></a>
+  
+      </div>
+
+
+    </div>
+    {% endfor %}
+  </div> -->
+
+  <table class="table table-bordereds">
+    <thead>
+        <tr>
+            <th>Category Image</th>
+            <th>Category Name</th>
+          
+            <th>Update</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in category %}
+        
+        <tr>
+          {% if item.image %}
+            <td><img src="{{item.image.url}}" height="50px" width="50px" alt=""></td>
+          {% else %}
+            <td><img src="#" height="50px" width="50px" alt=""></td>
+          {% endif %}
+            <td><a href="{% url 'category_view' item.slug %}">{{ item.name }}</a></td>
+            
+            <td>
+              <a href="{% url 'edit_category' item.id %}"><button class="btn btn-secondary btn-lg " type="submit">Edit</button></a>
+              <a href="{% url 'delete_category' item.id %}"><button class="btn btn-secondary btn-lg " type="submit">Delete</button></a>
+            </td>
+            
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+
+</div>
+{% endblock content %}

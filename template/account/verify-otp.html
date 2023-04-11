@@ -1,0 +1,39 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+    <a href="{% url 'home' %}">
+        <img src="{% static 'images\kairos\Kairos-Logo-450x138.png' %}" alt="Kairos" title="Belle Multipurpose Html Template" />
+    </a>
+</div>
+<!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">{{ category.name }}</h1>
+
+</div> -->
+<div class="page section-header text-center">
+    <div class="page-title">
+      <div class="wrapper">
+        <h1 class="page-width">OTP</h1>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
+        <div class="mb-4">
+            <form action="{% url 'verify_otp' %}" method="post">
+                {% csrf_token %}
+                <label for="otp">OTP</label>
+                <input type="text" id="otp" name="otp">
+                <br>
+                <input type="submit" value="verify" class="btn mb-3 ">
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}

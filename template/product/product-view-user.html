@@ -1,0 +1,71 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="py-3  bg-link" aria-label="breadcrumb" >
+    <div class="container m-0 p-0 breadcrumb">
+        <a class="breadcrumb-item" href="{% url 'home' %}">HOME </a>
+        <a class="breadcrumb-item active" aria-current="page" href="{% url 'product_view' category.slug %}">{{ category.name }}</a>
+    </div>
+</div>
+
+
+
+<div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+    <a href="{% url 'home' %}">
+        <img src="{% static 'images\kairos\Kairos-Logo-450x138.png' %}" alt="Kairos" title="Belle Multipurpose Html Template" />
+    </a>
+</div>
+<!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">{{ category.name }}</h1>
+
+</div> -->
+<div class="page section-header text-center">
+    <div class="page-title">
+      <div class="wrapper">
+        <h1 class="page-width">{{ category.name }}</h1>
+      </div>
+    </div>
+  </div>
+
+
+<div class="container">
+
+    <div class="row">
+        {% for item in products %}
+
+
+        <div class="col-md-4">
+
+
+
+            <div class="card-deck m-auto">
+                <div class="card" style="width:25rem;">
+                    {% if item.product_image%}
+                        <img class="card-img-top img-fluid rounded-start" style="width:100%;height:25rem;" src="{{ item.product_image.url }}" alt="Card image cap">
+                    {% else %}
+                        <img class="card-img-top img-fluid rounded-start" style="width:100%;height:25rem;" src="" alt="Card image cap">
+                    {% endif %}
+                    <div class="card-body">
+                        <a href="{% url 'item_view' item.category.slug item.slug %}">
+                            <h5 class="card-title">{{item.name}}</h5>
+                        </a>
+                        <p class="card-text">{{item.meta_title}}</p>
+                        <p class="card-text"><small class="text-muted">{{item.meta_description}}</small></p>
+                        <label class="me-3">Original Price : <s>Rs.{{item.original_price | stringformat:'d' }}</s></label>
+                        <label class="fw-bold">Selling Price : Rs.{{item.selling_price | stringformat:'d' }}</label>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock content %}

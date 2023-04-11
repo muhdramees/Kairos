@@ -1,0 +1,22 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>{{ category.name }}</h1>
+<ul>
+{% for product in products %}
+    <li>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>Price: {{ product.price }}</p>
+    </li>
+{% endfor %}
+</ul>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Apply Discount</button>
+</form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "name": "kairos-ecommers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "alertifyjs": "^1.13.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.7.3"
+  }
+}

@@ -1,0 +1,141 @@
+{% extends "custom-admin/base.html" %}
+{% load static %}
+{% block content %}
+<!-- <div class="py-3  bg-link" aria-label="breadcrumb" >
+    <div class="container m-0 p-0  breadcrumb ">
+        <a class="breadcrumb-item" href="{% url 'home' %}">HOME </a>
+        <a class="breadcrumb-item active" aria-current="page" href="{% url 'my_order' %}">My Order</a>
+    </div>
+</div> -->
+
+<div class="page section-header text-center">
+    <div class="page-title">
+      <div class="wrapper">
+        <h1 class="page-width">Product Offer List</h1>
+      </div>
+    </div>
+</div>
+
+
+
+<div class="content-wrapper">
+    <div class="row">
+      {% for message in messages %}
+        
+        <h3 class="m-3">{{ message }}</h3>
+      {% endfor %}
+      <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+                <p class="card-description">
+                    <a href="{% url 'add_product_offer'%}"><button type="button" class="btn btn-dark btn-md btn-block float-right">Add Product Offer</button></a> 
+
+                </p>
+          
+              
+              <div class="table-responsive">
+                {% if prod_offer %}
+                <table class="table">
+                  <thead>
+                    <tr>
+                      
+                      
+                      <th>Product Offer Name</th>
+                      <th>Discount</th>
+                      <th>Start Date</th>
+                      <th>End Date  </th>
+                      <th>Update</th>
+                      
+                      <th class="text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for c in prod_offer %}
+                    <tr>
+                      
+                      
+                      <td>{{ c.product_name }}</td>
+                      <td>{{ c.discount }}</td>
+                      <td>{{c.start_date}}</td>
+                      <td>{{c.end_date}}</td>
+                      <td> 
+
+                          <a href="{% url 'edit_product_offer' c.id %}"><button type="submit" class="btn btn-dark ">Edit</button> </a>
+                          <a href="{% url 'delete_product_offer' c.id %}"><button class="btn btn-secondary btn-lg " type="submit">Delete</button></a>
+                    </tr>
+                    
+
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% else %}
+                <p>No Category Offers</p>
+                {% endif %}
+              </div>
+
+
+              <div class="col-12 pb-1 mt-3">
+                <nav aria-label="Page navigation">
+                    {% if prod_offer.has_other_pages %}
+                  <ul class="pagination justify-content-center mb-3">
+                    {% if prod_offer.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ prod_offer.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+                      {% endif %}
+
+                    {% for i in prod_offer.paginator.page_range %}
+                    {% if prod_offer.number == i %}
+                    <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                    {% else %}
+                    <li class="page-item "><a class="page-link" href="?page={{ i }}">{{ i }}</a></li> 
+                    {% endif %}
+
+                    {% endfor %}
+
+
+                    {% if prod_offer.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ prod_offer.next_page_number }}" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                      </a>
+                      </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                      </a>
+                      </li>
+                      {% endif %}
+
+                    
+                </ul>
+                {% endif %}
+                </nav>
+            </div>
+
+
+            </div>
+          </div>
+        </div>    
+
+      
+  
+    </div>
+  </div>
+
+
+
+{% endblock content %}

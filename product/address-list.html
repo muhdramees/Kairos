@@ -1,0 +1,8 @@
+
+<select>
+    {% for address in addresses %}
+    <option>{{ address }}</option>
+    {% endfor %}
+</select>
+
+<a href="{% url 'add_address' %}">Add Address</a>

@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>  
+    {% include "home/head.html" %}
+</head>
+
+
+    {% block content %}
+
+    {% endblock content %}
+
+
+
+    <script src="{% static '\js\jquery-3.6.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '\js\custom.js' %}"></script>
+    <script src="{% static '\js\cheakout.js' %}"></script>
+    <script type="text/javascript" src="{% static '\js\alertify.min.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+
+    <!-- for auto complete in search -->
+    
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <script>
+        var availableTags = [];
+
+        $.ajax({
+            method: "GET",
+            url: "/product-list/",
+            success: function (response){
+                startAutocomplete(response)
+                
+            }
+        });
+        function startAutocomplete(availableTags)
+        {
+            $( "#searchproduct" ).autocomplete({
+            source: availableTags
+            });
+        }
+    </script>
+
+    <!-- <script>
+        alertify.set('notifier', 'position', 'top-right');
+
+        {% for msg in messages %}
+            alertify.success('{{msg}}')
+        {% endfor %}
+    </script> -->
+    {% block scripts %}
+
+    {% endblock scripts %}
+
+    {% include "home/footer.html" %}
+
+    
+
+</html>

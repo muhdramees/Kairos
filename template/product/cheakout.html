@@ -1,0 +1,182 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="py-3  bg-link" aria-label="breadcrumb" >
+    <div class="container m-0 p-0 breadcrumb">
+        <a class="breadcrumb-item" href="{% url 'home' %}">HOME </a>
+        <a class="breadcrumb-item active" aria-current="page" href="{% url 'cheakout' %}">Cheakout</a>
+    </div>
+</div>
+
+
+<div class="container mt-3">
+    <form action="{% url 'placeorder' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h6>Adress</h6>
+                        <div class="sda">
+                            <a href="{% url 'add_address' %}"><button type="submit" class="btn  w-50 ">Add Address</button></a>
+                            
+                        </div>
+                        <hr>
+                        <div class="row cheakoutform">
+                            <div class="col-md-6">
+                                <label for="">First Name</label>
+                                <input type="text" required value="{{ request.user.first_name }}" class="form-control" name="fname" placeholder="Enter first name">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Last name</label>
+                                <input type="text" required value="{{ request.user.last_name }}" class="form-control" name="lname" placeholder="Enter last name">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Email</label>
+                                <input type="email" required value="{{ request.user.email }}" class="form-control" name="email" placeholder="Enter Email">
+
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Phone</label>
+                                <input type="text" required value="{{ userprofile.phone }}" class="form-control" name="phone" placeholder="Enter phone">
+
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Address</label>
+                                <textarea required class="form-control" name="address" placeholder="Enter addess">{{ userprofile.address }}</textarea>
+
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">City</label>
+                                <input type="text" required value="{{ userprofile.city }}" class="form-control" name="city" placeholder="Enter City">
+
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">State</label>
+                                <input type="text" required value="{{ userprofile.state }}" class="form-control" name="state" placeholder="Enter State">
+
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Country</label>
+                                <input type="text" required value="{{ userprofile.country }}" class="form-control" name="country" placeholder="Enter Country">
+
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Pin Code</label>
+                                <input type="text" required value="{{ userprofile.pincode }}" class="form-control" name="pincode" placeholder="Enter Pin Code">
+
+                            </div>
+                            
+                        </div>
+                      
+                            <!-- {% for i in profile %}
+                                
+                                <div class="card" style="width: 18rem;">
+                                    
+                                    <div class="card-body">
+                                    <input type="radio" value="{{i.id}}">
+                                    <h5 class="card-title">{{i.user.first_name}} {{i.user.last_name}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{i.user}}</h6>
+                                    <p class="card-text">{{i.addess}}</p>
+                                    <p class="card-text">{{i.city}}</p>
+                                    <p class="card-text">{{i.state}}</p>
+                                    <p class="card-text">{{i.country}}</p>
+                                    <p class="card-text">{{i.pincode}}</p>
+                                    
+                                    </div>
+                                </div>
+                           {% endfor %} -->
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h6>Order Summary</h6>
+                        <hr>
+                        {% if cart_items %}
+                            <table class="table table-stripeds table-bordereds">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in cart_items%}
+                                        <tr>
+                                            <td>
+                                                <img src="{{ item.product.product_image.url }}" class="me-2" height="50px" width="50px">
+                                                {{ item.product.name}}
+                                            </td>
+                                            <td> {{ item.product_qty }}</td>
+                                            <td>{{ item.sub_total | stringformat:'d'}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <h6 class="fw-bold">Grand Total
+                            <span class="float-end">Rs. {{total_price | stringformat:'d' }}</span>
+                            </h6>
+                            <div class="selector mb-2" >
+                                
+
+                                <form action="{% url 'apply_coupon' %}" method="post">
+                                    {% csrf_token %}
+                                    <label for="coupon">Select Coupon:</label>
+                                    <select name="coupon_code" id="coupon">
+                                        <option value="">No Coupon</option>
+                                        {% for item in coupons %}
+                                            <option value="{{item.id}}" name="code">{{item.code}} - {{item.discount}}% off</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <div class="flex mt-2">
+                                        <button type="submit" class="btn  w-50 mr-2">Apply Coupon</button>
+                                        <!-- <button type="submit" class="btn  w-50">Delete Coupon</button> -->
+                                        
+                                    </div>
+
+                                </form>
+                                  
+                           
+                                
+                        
+                                
+                            </div>
+                            
+                            
+                            <input type="hidden" value="COD" name="payment_mode">
+                            <div class="mt-3">
+                                <button type="submit" class="btn  w-100">COD | Place Order</button>
+                                <!-- <button type="button" class="btn  w-100 mt-2 payWithRazorpay">Pay with Razorpay</button> -->
+                                <button type="button" class="btn w-100 mt-2 payWithRazorpay">Pay with Razorpay</button>
+
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+{% endblock scripts %}
+

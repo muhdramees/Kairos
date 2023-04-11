@@ -1,0 +1,98 @@
+{% extends "custom-admin/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+
+
+
+<div class="py-3  bg-link" aria-label="breadcrumb" >
+  <div class="container m-0 p-0 breadcrumb">
+    <a class="breadcrumb-item" href="{% url 'admin_dashboard' %}">Dashboard </a>
+    <a class="breadcrumb-item" href="{% url 'product_category' %}">Category </a>
+    <a class="breadcrumb-item active" aria-current="page" href="{% url 'category_view' category.slug %}">{{ category.name }}</a>
+  </div>
+</div>
+
+
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">{{ category.name }}</h1>
+  <div>
+    <a href="{% url 'add_product' %}"><button type="button" class="btn btn-secondary">Add {{ category.name }}</button></a>
+  </div>
+
+</div>
+
+
+
+<!-- <div class="container">
+
+  <div class="row">
+    {% for item in products %}
+
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+
+        <a href="#">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name}}</h5>
+            <span class="float-start">{{ item.original_price | stringformat:'d' }}</span>
+            <span class="float-end">{{ item.selling_price | stringformat:'d' }}</span>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+              content.</p>
+            <a href="" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </a>
+      </div>
+
+
+    </div>
+    {% endfor %}
+  </div>
+
+</div> -->
+
+<table class="table table-bordereds">
+  <thead>
+      <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Original price</th>
+          <th>Selling price</th>
+          <th>Update</th>
+          <th>Slug</th>
+         
+      </tr>
+  </thead>
+  <tbody>
+      {% for item in products %}
+      
+      <tr>
+        {% if item.product_image %}
+          <td><img src="{{item.product_image.url}}" height="50px" width="50px" alt=""></td>
+        {% else %}
+        <td><img src="" height="50px" width="50px" alt=""></td>
+        {% endif %}
+          <td><a href="#">{{ item.name }}</a></td>
+          <td>{{ item.original_price | stringformat:'d' }}</td>
+          <td>{{ item.selling_price | stringformat:'d' }}</td>
+          <td>
+            <a href="{% url 'edit_product' item.id %}"><button class="btn btn-secondary btn-lg " type="submit">Edit</button></a>
+            <a href="{% url 'delete_product' item.id %}"><button class="btn btn-secondary btn-lg " type="submit">Delete</button></a>
+          </td>
+          <td>{{item.slug}}</td>
+          
+          
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+
+</div>
+{% endblock content %}

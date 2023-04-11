@@ -1,0 +1,140 @@
+{% extends "custom-admin/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">User View</h1>
+
+</div>
+
+
+<div>
+
+
+  <div class="card-body">
+
+    <table class="table table-bordered border-primary">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Username</th>
+          <th scope="col">Status</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Block/Unblock</th>
+     
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <!-- <th scope="row"><img class="img-fluid"  src="{{ cr.images.url }}" alt=""></th> -->
+          <!-- <th scope="row"><a href="#"></a></th> -->
+          <!-- <td>{{ cr.id}}</td> -->
+          <td>{{ user.first_name }} {{ user.last_name }}</td>
+          <td>{{ user.email}}</td>
+          <td>{{ user.username}}</td>
+          <td>{% if user.is_superuser == True %}
+            <form action="{url 'customadmin/block_user' cr.id} " method="POST">
+              <button type="submit" class="btn btn-outline-success">Admin</button>
+              {% else %}
+              <button type="submit" class="btn btn-outline-danger">User</button>
+              {% endif %}
+            </form>
+          </td>
+          <td>
+            <a href="{% url 'edit_user' user.id %}" class="btn btn-warning">Edit</a>
+          </td>
+          <td>
+            {% if user.blocked is True %}
+              <a href="{% url 'block_user' user.id %}" onclick="unblockUser()"><button type="button" class="btn btn-danger mx-2">Unblock</button></a>
+            {% else %}
+              <a href="{% url 'block_user' user.id %}"onclick="blockUser()"><button type="submit" class="btn btn-dark ">Block</button> </a>
+            {% endif %}
+          </td>
+          
+          
+            <!-- <td>
+              <form action="{% url 'block_user' user.id %}" method="POST">
+               {% csrf_token %}
+               {% if cr.is_active == True %}
+               <button type="submit" onclick="showConfirm()" class="btn btn-outline-danger">Block</button>
+               {% else %}
+               <button type="submit" onclick="showConfirm()" class="btn btn-outline-warning">Unblock</button>
+               {% endif %}
+              </form>
+            </td> -->
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+
+  </div>
+
+  {% for message in messages %}
+
+  <div class="alert alert-danger" role="alert">
+    print("Message")
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+      {{message}}
+      </li>
+  </div>
+
+  {% endfor %}
+</div>
+
+<script>
+  function blockUser() {
+    event.preventDefault();
+    var dlt = event.currentTarget.href
+    console.log(dlt)
+    console.log("block")
+    Swal.fire({
+      title: 'Are you sure want to block this user?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2DAD49',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Block',
+      cancelButtonText: 'Back',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        window.location = dlt;
+      }
+    })
+  }
+  function unblockUser() {
+    event.preventDefault();
+    var dlt = event.currentTarget.href
+    console.log(dlt)
+    console.log("unblock")
+    Swal.fire({
+      title: 'Are you sure want to block this user?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2DAD49',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Unblock',
+      cancelButtonText: 'Back',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        window.location = dlt;
+      }
+    })
+  }
+</script>
+
+
+{% endblock content %}

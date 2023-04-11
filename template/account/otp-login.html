@@ -1,0 +1,143 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="pageWrapper">
+
+  <!--Header-->
+  <div class="header-wrap animated d-flex">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <!--Desktop Logo-->
+        <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+          <a href="{% url 'index' %}">
+            <img src="{% static 'images\kairos\Kairos-Logo-450x138.png' %}" alt="Belle Multipurpose Html Template"
+              title="Belle Multipurpose Html Template" />
+          </a>
+        </div>
+        <!--End Desktop Logo-->
+        <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+          <div class="d-block d-lg-none">
+            <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+              <i class="icon anm anm-times-l"></i>
+              <i class="anm anm-bars-r"></i>
+            </button>
+          </div>
+
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+          <div class="logo">
+            <a href="{% url 'index' %}">
+              <img src="{% static 'images\kairos\compass.jpg' %}" alt="Belle Multipurpose Html Template"
+                title="Belle Multipurpose Html Template" />
+            </a>
+          </div>
+        </div>
+        <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Mobile Menu-->
+
+  <!--Body Content-->
+  <div id="page-content">
+    <!--Page Title-->
+    <div class="page section-header text-center">
+      <div class="page-title">
+        <div class="wrapper">
+          <h1 class="page-width">Login</h1>
+        </div>
+      </div>
+    </div>
+    <!--End Page Title-->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
+          <div class="mb-4">
+            <form method="post" action="{% url 'send_otp' %}" id="CustomerLoginForm" accept-charset="UTF-8" class="contact-form">
+              {% csrf_token %}
+
+
+              <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+
+                  {{ form.as_p }}
+
+                  {% for message in messages %}
+
+                  <div class="alert alert-danger" role="alert">
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                      {{message}}
+                      </li>
+                  </div>
+
+                  {% endfor %}
+
+
+                </div>
+              </div>
+
+              <div class="row">
+
+                <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
+
+                  <input type="submit" class="btn mb-3" value="Sign In">
+
+
+                </div>
+                <p class="mb-4">
+                  <a href="#" id="RecoverPassword">Forgot your password?</a> &nbsp; | &nbsp;
+                  <a href="{% url 'user_registration' %}" id="customer_register_link">Create account</a>
+                  &nbsp; | &nbsp;
+                  <a href="" id="customer_register_link">OTP Log In</a>
+
+              </div>
+              </p>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--End Body Content-->
+
+<!--Footer-->
+
+<!--End Footer-->
+<!--Scoll Top-->
+<span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
+<!--End Scoll Top-->
+
+<script>
+  window.setTimeout(function () {
+    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+      $(this).remove();
+    });
+  }, 500);
+</script>
+
+<!-- Including Jquery -->
+<script src="{% static 'js/vendor/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/vendor/jquery.cookie.js' %}"></script>
+<script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/vendor/wow.min.js' %}"></script>
+<!-- Including Javascript -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/plugins.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/lazysizes.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</div>
+{% endblock content %}
+
+<!-- belle/login.html   11 Nov 2019 12:22:27 GMT -->
+
+</html>

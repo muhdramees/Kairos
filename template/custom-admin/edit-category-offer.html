@@ -1,0 +1,55 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="page section-header text-center">
+    <div class="page-title">
+      <div class="wrapper">
+        <h1 class="page-width">Edit Category Offer</h1>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
+        <div class="mb-4">
+          <form method="POST" action="{% url 'edit_category_offer' category_id %}" id="CustomerLoginForm" accept-charset="UTF-8" class="contact-form">
+            {% csrf_token %}
+
+
+            <div class="row"> 
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+
+                {{ form }}
+
+                {% for message in messages %}
+
+                <div class="alert alert-danger" role="alert">
+                  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {{message}}
+                    </li>
+                </div>
+
+                {% endfor %}
+
+
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+                    <input type="submit" class="btn mb-3" value="Edit">
+                    
+                </div>
+            </div>
+           
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
