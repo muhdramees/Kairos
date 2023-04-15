@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ab5090e0-9f42-49d6-ae73-76363f1f6c2f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coupon/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/coupon/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coupon/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/coupon/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_admin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kairos/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/kairos/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/cheakout.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/cheakout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/account/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/account/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/custom-admin/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/custom-admin/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/home/homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/home/homepage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/product/cheakout.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/product/cheakout.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2ORue7Sw9RwwuW6crHWZtASQ9Mg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/STUDY/Brototype/Data Structure"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ab5090e0-9f42-49d6-ae73-76363f1f6c2f" name="Changes" comment="" />
+      <created>1681535817342</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681535817342</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

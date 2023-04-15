@@ -216,81 +216,79 @@ def delete_wishlist_item(request):
 
 
 def cheakout(request):
-    # rawcart = Cart.objects.filter(user = request.user)
-    # coupon = Coupon.objects.all()
-    # profile = Profile.objects.all()
-    # form = CheckoutForm
-    
-    # for item in rawcart:
-    #     if item.product_qty > item.product.quantity:
-    #         # Cart.objects.delete(id=item.id)
-    #         cheakout_item = Cart.objects.filter(id = item.id)
-    #         cheakout_item.delete()
-
-    # cartitems = Cart.objects.filter(user = request.user)
-    # total_price = sum(item.product.selling_price * item.product_qty for item in cartitems)
-    # discounted_price = total_price
-    
-    
-    # userprofile = Profile.objects.filter(user = request.user).first()
-    
-
-    # context = {'cartitems':cartitems, 'total_price':total_price, 'userprofile':userprofile, 'coupon':coupon, 'profile':profile, 'form':form}
-    # return render(request, 'product/cheakout.html', context)
+ 
     coupon_discount = 0
     raw_cart = Cart.objects.filter(user=request.user)
     profile = Profile.objects.all()
     coupon = None
     form = CheckoutForm(request.POST or None)
-
+    coupons = Coupon.objects.all()
+    
     if 'coupon' in request.session:
         coupon = request.session['coupon']
 
-
-    if request.method == 'POST':
-        if form.is_valid():
-            coupon_code = form.cleaned_data('coupon_code')
-            if coupon_code:
-                try:
-                    coupon = Coupon.objects.get(code=coupon_code)
-                    request.session['coupon'] = {
-                        'id':coupon.id,
-                        'code':coupon.code,
-                        'discount':coupon.discount,
-                    }
-                    messages.success(request, f"Coupon code '{coupon.code}' applied!")
-
-                except Coupon.DoesNotExist:
-                    messages.error(request, "Invalid coupon code!")
-            else:
-                request.session.pop('coupon', None)
-
-
-    for item in raw_cart:
-        if item.product_qty > item.product.quantity:
-            item.delete()
-    
-    coupons = Coupon.objects.all()
     cart_items = Cart.objects.filter(user=request.user)
     print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     print(coupon_discount)
     total = sum([item.product.selling_price * item.product_qty for item in cart_items])
     total_price = total
 
-    # if coupons:
-    #     print(total,"!!!!!!!!!!!")
-    #     discount = coupon['discount']
-    #     total_price = total * (discount/100)
 
-    #     print("TTTTTTTTTTTTTTTTTTT", total_price)
-    # else:
-    #     print(total,"@@@@@@@@@@@")
-    #     total_price = total
-    #     print("iiiiiiiiiiiiiiiiii",total_price)
+    # if request.method == 'POST':
+    #     if form.is_valid():
+    #         coupon_code = form.cleaned_data('coupon_code')
+    #         if coupon_code:
+    #             try:
+    #                 coupon = Coupon.objects.get(code=coupon_code)
+    #                 request.session['coupon'] = {
+    #                     'id':coupon.id,
+    #                     'code':coupon.code,
+    #                     'discount':coupon.discount,
+    #                 }
+    #                 messages.success(request, f"Coupon code '{coupon.code}' applied!")
+
+    #             except Coupon.DoesNotExist:
+    #                 messages.error(request, "Invalid coupon code!")
+    #         else:
+    #             request.session.pop('coupon', None)
+
+    # if request.method == 'POST':
+    #     print("posttttttttttttttttttttttttttttt methosddddddddddddddddddddd")
+    #     if form.is_valid():
+    #         coupon_code = form.cleaned_data['coupon_code']  # Get the selected coupon code from form data
+    #         if coupon_code:
+    #             try:
+    #                 coupon = Coupon.objects.get(code=coupon_code)
+    #                 request.session['coupon'] = {
+    #                     # 'id': coupon.id,
+    #                     'code': coupon.code,
+    #                     'discount': coupon.discount,
+    #                 }
+    #                 messages.success(request, f"Coupon code '{coupon.code}' applied!")
+    #                 coupon_discount = Decimal(total) * Decimal(coupon.discount) / Decimal(100)
+                  
+    #                 total_price -=  coupon_discount
+    #             except Coupon.DoesNotExist:
+    #                 messages.error(request, "Invalid coupon code!")
+    #         else:
+    #             request.session.pop('coupon', None)
+
+
+    for item in raw_cart:
+        if item.product_qty > item.product.quantity:
+            item.delete()
+    
+
+    
+    
+
 
     # if coupon:
+    #     print("Couponnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+    #     coupon_discount = Decimal(total) * Decimal(coupon['discount']) / Decimal(100)
+    #     total_price -= coupon_discount
 
-    #     total_price -= total_price * (coupon.discount/100)
+
 
     print(total_price,"**************************")
 
@@ -302,7 +300,7 @@ def cheakout(request):
         'profile':profile,
         'coupon':coupon,
         'form':form,
-        'coupons':coupons
+        'coupons':coupons,
     }
     return render(request, 'product/cheakout.html', context)
 
@@ -454,6 +452,14 @@ def proceed_to_pay(request):
     total_price = 0
     for item in cart:
         total_price = total_price + item.product.selling_price * item.product_qty
+
+    if 'new_price' in request.session:
+      total_price=request.session['new_price']
+    else:
+       
+        total_price=total_price
+    print("total from proceed to pay",total_price)
+
 
     return JsonResponse({
         'total_price':total_price

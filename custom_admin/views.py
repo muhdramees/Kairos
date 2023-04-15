@@ -21,13 +21,12 @@ from  xhtml2pdf import pisa
 from docx import Document
 from django.utils.text import slugify
 from decimal import Decimal
-<<<<<<< HEAD
 from django.db.models import Sum
 from django.utils import timezone
 from datetime import datetime
-=======
-from Exception import PendingDeprecationWarning
->>>>>>> 7a9ac29f9c1b0689a37c5a0bc1ed73a374d426e8
+from django.db.models import Count,Q
+import datetime
+#from Exception import PendingDeprecationWarning
 
 # Create your views here.
 
@@ -107,15 +106,33 @@ def admin_dashboard(request):
     total_revenue = OrderItem.objects.filter(status='Order Placed').aggregate(Sum('price'))
 
     # Daily Sales
-    current_year = timezone.now().year
-    end_of_year = datetime(current_year, 12, 31)
-    order_details = OrderItem.objects.filter(created_at__lt=end_of_year)
-    monthly_order_count = []
-    month = timezone.now().month
-    for i in range(1, month+2):
-        monthly_order = order_details.filter(created_at__month=i).count()
+    # current_year = timezone.now().year
+    # end_of_year = datetime(current_year, 12, 31)
+    # order_details = OrderItem.objects.filter(created_at__lt=end_of_year)
+    # monthly_order_count = []
+    # month = timezone.now().month
+    # for i in range(1, month+2):
+    #     monthly_order = order_details.filter(created_at__month=i).count()
+    #     monthly_order_count.append(monthly_order)
+
+    current_year=timezone.now().year
+    print("current year : ",current_year)
+    order_details=Order.objects.filter(created_at__lt=datetime.date(current_year,12,31),status="Delivered")
+    monthly_order_count=[]
+    month=timezone.now().month
+    for i in range(1,month+2):
+        monthly_order=order_details.filter(created_at__month=i).count()
         monthly_order_count.append(monthly_order)
-      
+
+        
+
+    #    monthly sales
+    today=datetime.datetime.now()
+    dates=Order.objects.filter(created_at__month=today.month).values('created_at__day').annotate(order_items=Count('id')).order_by('created_at__day')
+    returns=Order.objects.filter(created_at__month=today.month).values('created_at__day').annotate(retunrs=Count('id',filter=Q(status='Cancelled'))).order_by('created_at__day')
+    sales=Order.objects.filter(created_at__month=today.month).values('created_at__day').annotate(sales=Count('id',filter=Q(status='Delivered'))).order_by('created_at__day')
+    
+    
     
 
 
@@ -143,6 +160,11 @@ def admin_dashboard(request):
         'monthly_order_count':monthly_order_count,
         'most_moving_product_count':most_moving_product_count,
         'most_moving_product':most_moving_product,
+        'dates':dates,
+        'returns':returns,
+        'sales':sales
+
+
         
 
 

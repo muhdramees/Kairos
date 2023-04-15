@@ -21,7 +21,7 @@ urlpatterns = [
 
 
 
-       path('apply-coupon/', views.apply_coupon, name='apply_coupon'),
+       # path('apply-coupon/', views.apply_coupon, name='apply_coupon'),
 
 
 

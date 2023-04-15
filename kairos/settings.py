@@ -28,13 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['*']
-=======
-ALLOWED_HOSTS = ['kairoslive.xyz']
->>>>>>> 7a9ac29f9c1b0689a37c5a0bc1ed73a374d426e8
+
 
 
 # Application definition

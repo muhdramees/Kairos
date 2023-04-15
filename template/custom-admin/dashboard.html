@@ -1,6 +1,7 @@
 {% extends "custom-admin/base.html" %}
 {% block content %}
 
+
   <div class="container-scroller">
     
     <!-- partial:partials/_navbar.html -->
@@ -234,16 +235,16 @@ new Chart(document.getElementById("sales-data"), {
         label: "Returned Orders",
         borderColor: "#3cba9f",
         fill: false
-      },
-    ]
+      }]
   },
   options: {
     title: {
       display: true,
-      {% comment %} text: 'World population per region (in millions)' {% endcomment %}
+      text: 'World population per region (in millions)'
     }
   }
 });
+
 
 
 
@@ -281,20 +282,21 @@ new Chart(document.getElementById("status_count"), {
   data: {
     labels: ["Placed","Shipped","Delivered","Returned","Cancelled"],
     datasets: [{
-      {% comment %} label: "Population (millions)", {% endcomment %}
       backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-      data: {{ status_count }}
+      data: [/* provide actual data here */]
     }]
   },
   options: {
     title: {
       display: true,
-      {% comment %} text: 'Predicted world population (millions) in 2050' {% endcomment %}
+      text: 'Predicted world population (millions) in 2050'
     }
   }
 });
+
 </script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 
   
 
