@@ -124,7 +124,7 @@ def admin_dashboard(request):
         monthly_order=order_details.filter(created_at__month=i).count()
         monthly_order_count.append(monthly_order)
 
-        
+        ``
 
     #    monthly sales
     today=datetime.datetime.now()
