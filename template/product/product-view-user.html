@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 
+
 <div class="py-3  bg-link" aria-label="breadcrumb" >
     <div class="container m-0 p-0 breadcrumb">
         <a class="breadcrumb-item" href="{% url 'home' %}">HOME </a>
@@ -42,7 +43,7 @@
             <div class="card-deck m-auto">
                 <div class="card" style="width:25rem;">
                     {% if item.product_image%}
-                        <img class="card-img-top img-fluid rounded-start" style="width:100%;height:25rem;" src="{{ item.product_image.url }}" alt="Card image cap">
+                       <a href="{% url 'item_view' item.category.slug item.slug %}"> <img class="card-img-top img-fluid rounded-start" style="width:100%;height:25rem;" src="{{ item.product_image.url }}" alt="Card image cap"></a>
                     {% else %}
                         <img class="card-img-top img-fluid rounded-start" style="width:100%;height:25rem;" src="" alt="Card image cap">
                     {% endif %}

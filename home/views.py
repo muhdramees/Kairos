@@ -129,6 +129,7 @@ def view_cart(request):
 
 
 
+@login_required(login_url='user_login')
 def update_cart(request):
     if request.method == 'POST':
         prod_id = int(request.POST.get('product_id'))
@@ -147,7 +148,7 @@ def update_cart(request):
 
 
 
-
+@login_required(login_url='user_login')
 def delete_cart_item(request):
     if request.method == 'POST':
         prod_id = int(request.POST.get('product_id'))

@@ -124,7 +124,7 @@ def admin_dashboard(request):
         monthly_order=order_details.filter(created_at__month=i).count()
         monthly_order_count.append(monthly_order)
 
-        ``
+    
 
     #    monthly sales
     today=datetime.datetime.now()
@@ -868,7 +868,7 @@ def discount_product_price(selling_price,id):
         return new_selling_price
         
     except CategoryOffer.DoesNotExist:
-        pass
+        return selling_price
 
 def discount_product_category_price(discount,product_name):
     discount=float(discount)
